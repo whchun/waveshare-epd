@@ -1,6 +1,8 @@
 #ifndef EPD_H
 #define EPD_H
 
+#include <Adafruit_GFX.h>
+
 #define    CMD_SIZE                           512
 
 /*
@@ -76,11 +78,16 @@ set screen rotation
 #define    EPD_NORMAL                         0
 #define    EPD_INVERSION                      1
 
-class WaveshareEPD
+class WaveshareEPD //: public Adafruit_GFX
 {
     public:
-        WaveshareEPD();
-        ~WaveshareEPD();
+        WaveshareEPD(int wakeupPin, int resetPin);
+        void init();
+    
+    private:
+        int wakeupPin;
+        int resetPin;
+
 };
 
 #endif
