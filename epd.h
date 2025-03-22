@@ -1,13 +1,23 @@
-#ifndef WAVESHAREEPD_H
-#define WAVESHAREEPD_H
+#ifndef EPD_H
+#define EPD_H
+
+#include <Arduino.h>
+#include <SoftwareSerial.h>
+
 class WaveshareEPD
 {
     public:
-        void init(int, int);
-    
-    private:
-        int wakeupPin;
-        int resetPin;
-};
+        WaveshareEPD(uint8_t, uint8_t, uint8_t, uint8_t);
 
+        void init();
+        void wakeup();
+        void reset();
+
+        void test();
+
+    private:
+        SoftwareSerial *serial;
+        uint8_t wakeupPin;
+        uint8_t resetPin;
+};
 #endif
