@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 
+#include "frame.h"
+
 class WaveshareEPD
 {
     public:
