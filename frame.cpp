@@ -14,20 +14,16 @@ Frame::~Frame()
 
 void Frame::setBuffer(uint8_t command)
 {
-    // TODO: Fix this
     bufferLength = 9;
     buffer = new uint8_t[bufferLength];
-
-    buffer[0] = 0xA5;
+    
+    buffer[0] = Constant::frameHeader;
     // // Fix 1, 2
     buffer[1] = 0x00;
     buffer[2] = 0x09;
     buffer[3] = (uint8_t)command;
-    // // Fix this param
-    buffer[4] = 0xCC;
-    buffer[5] = 0x33;
-    buffer[6] = 0xC3;
-    buffer[7] = 0x3C;
+    memcpy(buffer+4, Constant::frameEnd, Constant::frameEndSize*sizeof(uint8_t));
+
     buffer[8] = getParityByte();
 }
 
@@ -39,11 +35,11 @@ unsigned char* Frame::getBuffer()
 uint8_t Frame::getParityByte()
 {
     // Add error checking
-    // if (bufferLength <= 0)
-    //     return 0x00;
+    if (bufferLength <= 0)
+        return 0x00;
 
     uint8_t parityByte = buffer[0];
-    for (int i = 1; i < bufferLength; i++) {
+    for (int i = 1; i < bufferLength-1; i++) {
         parityByte ^= buffer[i];
     }
     return parityByte;

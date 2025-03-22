@@ -1,7 +1,7 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-// #include "constant.h"
+#include "constant.h"
 #include <Arduino.h>
 
 // #define FRAME_HEADER 0xA5

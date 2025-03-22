@@ -7,7 +7,8 @@ class Constant
 {
     public:
         static const uint8_t frameHeader = 0xA5;
-        static constexpr uint8_t frameEnd[] = {0xCC, 0x33, 0xC3, 0x3C};
+        static const int frameEndSize = 4;
+        static const uint8_t frameEnd[frameEndSize];
 };
 
 #endif
