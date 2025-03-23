@@ -15,6 +15,7 @@ class Frame
 
         void setBuffer(CommandType, uint8_t * params = NULL, int paramSize = 0);
         uint8_t *getBuffer();
+        void resetBuffer();
         int getBufferSize();
 
     private:

@@ -46,28 +46,27 @@ void WaveshareEPD::render(CommandType commandType)
     _serial->write(frame->getBuffer(), frame->getBufferSize());
 }
 
-void WaveshareEPD::test()
+void WaveshareEPD::renderText(FontSize fontSize, int x, int y, const char *text)
 {
     Frame *frame = new Frame();
-    frame->setBuffer(SET_FONT, {0x01}); // FIX
+
+    // Set Font
+    // uint8_t tt[10] = {0xA5, 0x00, 0x0A, 0x1E, 0x03, 0xCC, 0x33, 0xC3, 0x3C, 0xB2};
+    // _serial->write(tt, 10);
+    frame->setBuffer(SET_FONT, {0x03}, 1);
     _serial->write(frame->getBuffer(), frame->getBufferSize());
 
-    Frame *frame1 = new Frame();
-    uint8_t t1 = (300 >> 8) & 0xFF;
-    uint8_t t2 = 300 & 0xFF;
-    int x = 300;
-    int y = 250;
+    frame->resetBuffer();
 
-    //uint8_t ch[8] = {0x00, 0x0A, 0x00, 0x0A, 0x40, 0x40, 0x40, 0x40};
-    const char *text = "HELLO";
+    // Send Text
     int textLength = strlen(text);
     int paramSize = 4 + textLength;
-    uint8_t *ch = new uint8_t[paramSize];
-    ch[0] = 0x00;
-    ch[1] = 0x0A;
-    ch[2] = 0x00;
-    ch[3] = 0x0A;
-    memcpy(ch+4, text, textLength * sizeof(uint8_t));
-    frame1->setBuffer(DISPLAY_TEXT, ch, paramSize); // FIX
-    _serial->write(frame1->getBuffer(), frame1->getBufferSize());
+    uint8_t *params= new uint8_t[paramSize];
+    params[0] = (x >> 8) & 0xFF;
+    params[1] = x & 0xFF;
+    params[2] = (y >> 8) & 0xFF;
+    params[3] = y & 0xFF;
+    memcpy(params + 4, text, textLength * sizeof(uint8_t));
+    frame->setBuffer(DISPLAY_TEXT, params, paramSize);
+    _serial->write(frame->getBuffer(), frame->getBufferSize());
 }

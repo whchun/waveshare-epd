@@ -6,15 +6,13 @@ Frame::Frame(): _buffer(NULL), _bufferSize(0)
 
 Frame::~Frame()
 {
-    delete[] _buffer;
-    _buffer = nullptr;
-    _bufferSize = 0;
+    resetBuffer();
 }
 
 void Frame::setBuffer(CommandType commandType, uint8_t *params, int paramSize)
 {
     Command *command = Constant::getCommandData(commandType);
-    if (params != NULL) {
+    if (params != NULL && paramSize > 0) {
         command->setParamSize(paramSize);
     }
 
@@ -40,8 +38,7 @@ void Frame::setBuffer(CommandType commandType, uint8_t *params, int paramSize)
     offset += 1;
 
     // Params
-    if (params != NULL) {
-        int paramSize = command->getParamSize();
+    if (params != NULL && paramSize > 0) {
         memcpy(
             _buffer + offset,
             params,
@@ -60,6 +57,13 @@ void Frame::setBuffer(CommandType commandType, uint8_t *params, int paramSize)
 
     // Parity byte
     _buffer[offset] = getParityByte();
+}
+
+void Frame::resetBuffer()
+{
+    delete[] _buffer;
+    _buffer = NULL;
+    _bufferSize = 0;
 }
 
 unsigned char* Frame::getBuffer()

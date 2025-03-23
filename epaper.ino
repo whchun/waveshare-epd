@@ -16,7 +16,7 @@ void setup(void)
 
     display->render(CLEAR);
 
-    display->test();
+    display->renderText(SIZE_64, 150, 200, "WHATTT");
     display->render(UPDATE_DISPLAY);
 }
 

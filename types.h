@@ -14,10 +14,8 @@ enum CommandType {
     DISPLAY_TEXT,
 };
 
-// enum ParamType {
-//     NONE,
-//     BYTE,
-//     SHORT,
-//     DWORD,
-//     STRING
-// };
+enum FontSize {
+    SIZE_32 = 1,
+    SIZE_48 = 2,
+    SIZE_64 = 3,
+};

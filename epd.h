@@ -17,7 +17,7 @@ class WaveshareEPD
         void reset();
 
         void render(CommandType);
-        void test();
+        void renderText(FontSize, int , int, const char *);
 
     private:
         SoftwareSerial *_serial;
