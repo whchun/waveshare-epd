@@ -1,11 +1,11 @@
 #ifndef FRAME_H
 #define FRAME_H
 
+#include "types.h"
 #include "constant.h"
-#include <Arduino.h>
+#include "command.h"
 
-// #define FRAME_HEADER 0xA5
-// #define FRAME_END {0xCC, 0x33, 0xC3, 0x3C}
+#include <Arduino.h>
 
 class Frame
 {
@@ -13,15 +13,14 @@ class Frame
         Frame();
         ~Frame();
 
-        void setBuffer(uint8_t);
+        void setBuffer(CommandType);
         uint8_t *getBuffer();
 
     private:
         uint8_t getParityByte();
-        int getCommandParameterLength(uint8_t);
 
-        uint8_t *buffer;
-        int bufferLength;
+        uint8_t *_buffer;
+        int _bufferLength;
         
 };
 

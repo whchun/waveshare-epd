@@ -2,50 +2,48 @@
 
 Frame::Frame()
 {
-    buffer = NULL;
-    bufferLength = 0;
+    _buffer = NULL;
+    _bufferLength = 0;
 }
 
 Frame::~Frame()
 {
-    delete[] buffer;
-    buffer = nullptr;
+    delete[] _buffer;
+    _buffer = nullptr;
 }
 
-void Frame::setBuffer(uint8_t command)
+void Frame::setBuffer(CommandType commandType)
 {
-    bufferLength = 9;
-    buffer = new uint8_t[bufferLength];
-    
-    buffer[0] = Constant::frameHeader;
-    // // Fix 1, 2
-    buffer[1] = 0x00;
-    buffer[2] = 0x09;
-    buffer[3] = (uint8_t)command;
-    memcpy(buffer+4, Constant::frameEnd, Constant::frameEndSize*sizeof(uint8_t));
+    Command *command = Constant::getCommandData(commandType);
+    _bufferLength = command->getCommandSize();
+    int offset = command->getOffset();
+    _buffer = new uint8_t[_bufferLength];
 
-    buffer[8] = getParityByte();
+    _buffer[0] = Constant::frameHeader;
+    // // // Fix 1, 2
+    _buffer[1] = 0x00;
+    _buffer[2] = 0x09;
+    _buffer[3] = command->getCommandByte();
+    // TODO: Add param
+    memcpy(_buffer+offset, Constant::frameEnd, Constant::frameEndSize*sizeof(uint8_t));
+
+    _buffer[8] = getParityByte();
 }
 
 unsigned char* Frame::getBuffer()
 {
-    return &buffer[0];
+    return &_buffer[0];
 }
 
 uint8_t Frame::getParityByte()
 {
     // Add error checking
-    if (bufferLength <= 0)
+    if (_bufferLength <= 0)
         return 0x00;
 
-    uint8_t parityByte = buffer[0];
-    for (int i = 1; i < bufferLength-1; i++) {
-        parityByte ^= buffer[i];
+    uint8_t parityByte = _buffer[0];
+    for (int i = 1; i < _bufferLength-1; i++) {
+        parityByte ^= _buffer[i];
     }
     return parityByte;
-}
-
-int Frame::getCommandParameterLength(uint8_t command)
-{
-    return 0;
 }

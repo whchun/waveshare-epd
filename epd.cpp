@@ -45,7 +45,7 @@ void WaveshareEPD::test()
     // Frame frame = new Frame(0x00);
     // serial->write(frame.getBuffer(), 9);
     Frame *frame = new Frame();
-    frame->setBuffer(0x0A);
+    frame->setBuffer(UPDATE_DISPLAY);
     serial->write(frame->getBuffer(), 9);
 
     serial->println("TEST");

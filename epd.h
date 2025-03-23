@@ -1,10 +1,11 @@
 #ifndef EPD_H
 #define EPD_H
 
+#include "types.h"
+#include "frame.h"
+
 #include <Arduino.h>
 #include <SoftwareSerial.h>
-
-#include "frame.h"
 
 class WaveshareEPD
 {
