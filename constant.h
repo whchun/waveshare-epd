@@ -12,11 +12,10 @@ class Constant
         static const int frameEndSize = 4;
         static const uint8_t frameEnd[frameEndSize];
 
-        static const Command commands[1];
+        static const int commandSize =  2;
+        static const Command commands[commandSize];
 
         static Command* getCommandData(CommandType);
-    private:
-
 
 };
 

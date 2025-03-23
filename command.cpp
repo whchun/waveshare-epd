@@ -1,14 +1,9 @@
 #include "command.h"
 
-Command::Command(CommandType commandType, uint8_t commandByte, ParamType paramType) :
-    _commandType(commandType), _commandByte(commandByte), _paramType(paramType)
+Command::Command(CommandType commandType, uint8_t commandByte, ParamType paramType, int paramByteSize) :
+    _commandType(commandType), _commandByte(commandByte), _paramType(paramType), _paramByteSize(paramByteSize)
 {
 
-}
-
-uint8_t Command::getCommandByte()
-{
-    return _commandByte;
 }
 
 CommandType Command::getCommandType()
@@ -16,45 +11,33 @@ CommandType Command::getCommandType()
     return _commandType;
 }
 
-int Command::getCommandSize()
+uint8_t Command::getCommandByte()
 {
-    // Frame header + length + command + param + frame end + parity
-    int paramLength = getParamLength();
-    return 9 + paramLength;
+    return _commandByte;
 }
 
-int Command::getParamLength()
+uint8_t *Command::getFrameLengthBytes()
 {
-    switch(_paramType) {
-        case NONE:
-            return 0;
-        case BYTE:
-            return 1;
-        case SHORT:
-            return 2;
-        case DWORD:
-            return 4;
-        default:
-            return 100; // TODO: Fix string
-    }
+    uint8_t *frameLengthBytes = new uint8_t[NUM_FRAME_LENGTH_BYTES];
+    int frameLength = getCommandFrameSize();
+    frameLengthBytes[0] = (frameLength & 0x0000FF00) >> 8;
+    frameLengthBytes[1] = (frameLength & 0x000000FF);
+    
+    return frameLengthBytes;
 }
 
-int Command::getFrameLength()
+int Command::getCommandFrameSize()
 {
-    return 2; // TODO: Fix this
+    return 9 + _paramByteSize;
 }
 
-uint8_t *Command::getFrameLengthByte()
+int Command::getFrameLengthSize()
 {
-    int frameLength = getFrameLength();
-    if (_paramType == NONE) {
-        return new uint8_t[frameLength]{0x00, 0x09};
-    }
-    // TODO: ADD
-    return {};
+    return NUM_FRAME_LENGTH_BYTES;
 }
 
-int Command::getOffset()
+int Command::getFrameEndOffset()
 {
-    return 2 + getFrameLength() + getParamLength();
+    // TODO: Fix for string
+    return 2 + getFrameLengthSize() + _paramByteSize;
 }

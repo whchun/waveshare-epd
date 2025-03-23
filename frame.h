@@ -20,7 +20,7 @@ class Frame
         uint8_t getParityByte();
 
         uint8_t *_buffer;
-        int _bufferLength;
+        int _bufferSize;
         
 };
 

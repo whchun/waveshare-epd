@@ -2,9 +2,14 @@
 
 #include <Arduino.h>
 
+/* 
+ * Command from command look-up table
+ * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
+ */
 enum CommandType {
-    HANDSHAKE,
-    UPDATE_DISPLAY
+    SLEEP,
+    UPDATE_DISPLAY,
+    
 };
 
 enum ParamType {
