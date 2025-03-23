@@ -1,7 +1,7 @@
 #include "command.h"
 
-Command::Command(CommandType commandType, uint8_t commandByte, ParamType paramType, int paramByteSize) :
-    _commandType(commandType), _commandByte(commandByte), _paramType(paramType), _paramByteSize(paramByteSize)
+Command::Command(CommandType commandType, uint8_t commandByte, ParamType paramType, int paramSize) :
+    _commandType(commandType), _commandByte(commandByte), _paramType(paramType), _paramSize(paramSize)
 {
 
 }
@@ -28,7 +28,7 @@ uint8_t *Command::getFrameLengthBytes()
 
 int Command::getCommandFrameSize()
 {
-    return 9 + _paramByteSize;
+    return 9 + _paramSize;
 }
 
 int Command::getFrameLengthSize()
@@ -36,8 +36,8 @@ int Command::getFrameLengthSize()
     return NUM_FRAME_LENGTH_BYTES;
 }
 
-int Command::getFrameEndOffset()
+int Command::getParamSize()
 {
-    // TODO: Fix for string
-    return 2 + getFrameLengthSize() + _paramByteSize;
+    // FIX String
+    return _paramSize;
 }

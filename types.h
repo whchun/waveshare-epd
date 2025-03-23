@@ -9,7 +9,8 @@
 enum CommandType {
     SLEEP,
     UPDATE_DISPLAY,
-    
+    CLEAR,
+    SET_FONT,
 };
 
 enum ParamType {

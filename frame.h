@@ -13,8 +13,9 @@ class Frame
         Frame();
         ~Frame();
 
-        void setBuffer(CommandType);
+        void setBuffer(CommandType, uint8_t * params=NULL);
         uint8_t *getBuffer();
+        int getBufferSize();
 
     private:
         uint8_t getParityByte();

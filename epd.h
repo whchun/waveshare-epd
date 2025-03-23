@@ -16,11 +16,12 @@ class WaveshareEPD
         void wakeup();
         void reset();
 
+        void render(CommandType);
         void test();
 
     private:
-        SoftwareSerial *serial;
-        uint8_t wakeupPin;
-        uint8_t resetPin;
+        SoftwareSerial *_serial;
+        uint8_t _wakeupPin;
+        uint8_t _resetPin;
 };
 #endif

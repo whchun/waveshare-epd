@@ -18,13 +18,13 @@ class Command
 
         int getCommandFrameSize();
         int getFrameLengthSize();
-        int getFrameEndOffset();
+        int getParamSize();
 
     private:
         CommandType _commandType;
         uint8_t _commandByte;
         ParamType _paramType;
-        int _paramByteSize;
+        int _paramSize;
 };
 
 #endif
