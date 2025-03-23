@@ -11,12 +11,15 @@ Frame::~Frame()
     _bufferSize = 0;
 }
 
-void Frame::setBuffer(CommandType commandType, uint8_t *params)
+void Frame::setBuffer(CommandType commandType, uint8_t *params, int paramSize)
 {
     Command *command = Constant::getCommandData(commandType);
-    _bufferSize = command->getCommandFrameSize();
+    if (params != NULL) {
+        command->setParamSize(paramSize);
+    }
 
     int offset = 0;
+    _bufferSize = command->getCommandFrameSize();
     _buffer = new uint8_t[_bufferSize];
 
     // Frame header
@@ -24,7 +27,7 @@ void Frame::setBuffer(CommandType commandType, uint8_t *params)
     offset += 1;
 
     // Frame Length
-    int frameLengthSize = command->getFrameLengthSize();    
+    int frameLengthSize = command->getFrameLengthSize();
     memcpy(
         _buffer + offset,
         command->getFrameLengthBytes(),

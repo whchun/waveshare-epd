@@ -13,7 +13,7 @@ class Frame
         Frame();
         ~Frame();
 
-        void setBuffer(CommandType, uint8_t * params=NULL);
+        void setBuffer(CommandType, uint8_t * params = NULL, int paramSize = 0);
         uint8_t *getBuffer();
         int getBufferSize();
 

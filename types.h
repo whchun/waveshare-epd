@@ -11,12 +11,13 @@ enum CommandType {
     UPDATE_DISPLAY,
     CLEAR,
     SET_FONT,
+    DISPLAY_TEXT,
 };
 
-enum ParamType {
-    NONE,
-    BYTE,
-    SHORT,
-    DWORD,
-    STRING
-};
+// enum ParamType {
+//     NONE,
+//     BYTE,
+//     SHORT,
+//     DWORD,
+//     STRING
+// };

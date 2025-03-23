@@ -51,4 +51,23 @@ void WaveshareEPD::test()
     Frame *frame = new Frame();
     frame->setBuffer(SET_FONT, {0x01}); // FIX
     _serial->write(frame->getBuffer(), frame->getBufferSize());
+
+    Frame *frame1 = new Frame();
+    uint8_t t1 = (300 >> 8) & 0xFF;
+    uint8_t t2 = 300 & 0xFF;
+    int x = 300;
+    int y = 250;
+
+    //uint8_t ch[8] = {0x00, 0x0A, 0x00, 0x0A, 0x40, 0x40, 0x40, 0x40};
+    const char *text = "HELLO";
+    int textLength = strlen(text);
+    int paramSize = 4 + textLength;
+    uint8_t *ch = new uint8_t[paramSize];
+    ch[0] = 0x00;
+    ch[1] = 0x0A;
+    ch[2] = 0x00;
+    ch[3] = 0x0A;
+    memcpy(ch+4, text, textLength * sizeof(uint8_t));
+    frame1->setBuffer(DISPLAY_TEXT, ch, paramSize); // FIX
+    _serial->write(frame1->getBuffer(), frame1->getBufferSize());
 }

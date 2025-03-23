@@ -14,7 +14,9 @@ void setup(void)
     display->wakeup();
     display->reset();
 
-    // display->test();
+    display->render(CLEAR);
+
+    display->test();
     display->render(UPDATE_DISPLAY);
 }
 

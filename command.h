@@ -9,7 +9,7 @@
 class Command
 {
     public:
-        Command(CommandType, uint8_t, ParamType, int);
+        Command(CommandType, uint8_t);
 
         CommandType getCommandType();
 
@@ -19,11 +19,11 @@ class Command
         int getCommandFrameSize();
         int getFrameLengthSize();
         int getParamSize();
+        void setParamSize(int);
 
     private:
         CommandType _commandType;
         uint8_t _commandByte;
-        ParamType _paramType;
         int _paramSize;
 };
 
