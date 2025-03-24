@@ -9,19 +9,19 @@
 
 class WaveshareEPD
 {
-    public:
-        WaveshareEPD(uint8_t, uint8_t, uint8_t, uint8_t);
+public:
+    WaveshareEPD(uint8_t, uint8_t, uint8_t, uint8_t);
 
-        void init();
-        void wakeup();
-        void reset();
+    void init();
+    void wakeup();
+    void reset();
 
-        void render(CommandType);
-        void renderText(FontSize, int , int, const char *);
+    void render(CommandType);
+    void renderText(FontSize, int, int, const char *);
 
-    private:
-        SoftwareSerial *_serial;
-        uint8_t _wakeupPin;
-        uint8_t _resetPin;
+private:
+    SoftwareSerial *_serial;
+    uint8_t _wakeupPin;
+    uint8_t _resetPin;
 };
 #endif
