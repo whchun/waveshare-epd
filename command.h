@@ -8,23 +8,23 @@
 
 class Command
 {
-    public:
-        Command(CommandType, uint8_t);
+public:
+    Command(CommandType, uint8_t);
 
-        CommandType getCommandType();
+    CommandType getCommandType();
 
-        uint8_t getCommandByte();
-        uint8_t* getFrameLengthBytes();
+    uint8_t getCommandByte();
+    uint8_t *getFrameLengthBytes();
 
-        int getCommandFrameSize();
-        int getFrameLengthSize();
-        int getParamSize();
-        void setParamSize(int);
+    int getCommandFrameSize();
+    int getFrameLengthSize();
+    int getParamSize();
+    void setParamSize(int);
 
-    private:
-        CommandType _commandType;
-        uint8_t _commandByte;
-        int _paramSize;
+private:
+    CommandType _commandType;
+    uint8_t _commandByte;
+    int _paramSize;
 };
 
 #endif

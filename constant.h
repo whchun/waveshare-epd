@@ -7,16 +7,15 @@
 
 class Constant
 {
-    public:
-        static const uint8_t frameHeader = 0xA5;
-        static const int frameEndSize = 4;
-        static const uint8_t frameEnd[frameEndSize];
+public:
+    static const uint8_t frameHeader = 0xA5;
+    static const int frameEndSize = 4;
+    static const uint8_t frameEnd[frameEndSize];
 
-        static const int commandSize = 5;
-        static const Command commands[commandSize];
+    static const int commandSize = 5;
+    static const Command commands[commandSize];
 
-        static Command* getCommandData(CommandType);
-
+    static Command *getCommandData(CommandType);
 };
 
 #endif

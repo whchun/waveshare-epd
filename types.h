@@ -2,11 +2,12 @@
 
 #include <Arduino.h>
 
-/* 
+/*
  * Command from command look-up table
  * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
  */
-enum CommandType {
+enum CommandType
+{
     SLEEP,
     UPDATE_DISPLAY,
     CLEAR,
@@ -14,7 +15,8 @@ enum CommandType {
     DISPLAY_TEXT,
 };
 
-enum FontSize {
+enum FontSize
+{
     SIZE_32 = 1,
     SIZE_48 = 2,
     SIZE_64 = 3,

@@ -1,5 +1,4 @@
-#include "types.h"
-#include "epd.h"
+#include <epd.h>
 
 #define WAKEUP_PIN 2
 #define RESET_PIN 3
@@ -22,5 +21,4 @@ void setup(void)
 
 void loop(void)
 {
-
 }
