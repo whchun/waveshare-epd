@@ -50,10 +50,10 @@ void WaveshareEPD::renderText(FontSize fontSize, int x, int y, const char *text)
     Frame *frame = new Frame();
 
     // Set Font
-    uint8_t tt[10] = {0xA5, 0x00, 0x0A, 0x1E, 0x03, 0xCC, 0x33, 0xC3, 0x3C, 0xB2};
-    _serial->write(tt, 10);
-    // frame->setBuffer(SET_FONT, {0x03}, 1);
-    // _serial->write(frame->getBuffer(), frame->getBufferSize());
+    // uint8_t *paramsT = new uint8_t[1]{(uint8_t)fontSize};
+    // paramsT[0] = (uint8_t)fontSize;
+    frame->setBuffer(SET_FONT, new uint8_t[1]{(uint8_t)fontSize}, 1);
+    _serial->write(frame->getBuffer(), frame->getBufferSize());
 
     frame->resetBuffer();
 
