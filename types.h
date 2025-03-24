@@ -10,8 +10,14 @@ enum CommandType
 {
     SLEEP,
     UPDATE_DISPLAY,
-    CLEAR,
+    ROTATE_SCREEN,
+    // Set color
     SET_FONT,
+    DRAW_LINE,
+    DRAW_RECTANGLE,
+    DRAW_CIRCLE,
+    DRAW_TRIANGLE,
+    CLEAR,
     DISPLAY_TEXT,
     DISPLAY_IMAGE,
 };
@@ -21,6 +27,14 @@ enum FontSize
     SIZE_32 = 1,
     SIZE_48 = 2,
     SIZE_64 = 3,
+};
+
+enum Orientation
+{
+    ORIENTATION_0 = 0,
+    ORIENTATION_90 = 1,
+    ORIENTATION_180 = 2,
+    ORIENTATION_270 = 3,
 };
 
 struct Coordinate

@@ -15,9 +15,12 @@ void setup(void)
 
     display->render(CLEAR);
 
-    // display->renderText(SIZE_64, 300, 200, "WHATTT");
-    display->renderImage(10, 10, "lena.bmp");
+    int param = ORIENTATION_180;
+    display->render(ROTATE_SCREEN, &param);
+    display->renderText(SIZE_64, 300, 200, "Hello World");
+
     display->render(UPDATE_DISPLAY);
+
 }
 
 void loop(void)
