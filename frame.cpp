@@ -9,12 +9,13 @@ Frame::~Frame()
     resetBuffer();
 }
 
-void Frame::setBuffer(CommandType commandType, uint8_t *params, int paramSize)
+void Frame::setBuffer(CommandType commandType, FrameParam *params)
 {
     Command *command = Constant::getCommandData(commandType);
-    if (params != NULL && paramSize > 0)
+
+    if (params != NULL)
     {
-        command->setParamSize(paramSize);
+        command->setParamSize(params->size);
     }
 
     int offset = 0;
@@ -22,7 +23,7 @@ void Frame::setBuffer(CommandType commandType, uint8_t *params, int paramSize)
     _buffer = new uint8_t[_bufferSize];
 
     // Frame header
-    _buffer[0] = Constant::frameHeader;
+    _buffer[0] = FRAME_HEADER;
     offset += 1;
 
     // Frame Length
@@ -38,21 +39,21 @@ void Frame::setBuffer(CommandType commandType, uint8_t *params, int paramSize)
     offset += 1;
 
     // Params
-    if (params != NULL && paramSize > 0)
+    if (params != NULL)
     {
         memcpy(
             _buffer + offset,
-            params,
-            paramSize * sizeof(uint8_t));
-        offset += paramSize;
+            params->data,
+            params->size * sizeof(uint8_t));
+        offset += params->size;
     }
 
     // Frame end
     memcpy(
         _buffer + offset,
         Constant::frameEnd,
-        Constant::frameEndSize * sizeof(uint8_t));
-    offset += Constant::frameEndSize;
+        FRAME_END_SIZE * sizeof(uint8_t));
+    offset += FRAME_END_SIZE;
 
     // Parity byte
     _buffer[offset] = getParityByte();

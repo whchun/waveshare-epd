@@ -18,10 +18,13 @@ public:
 
     void render(CommandType);
     void renderText(FontSize, int, int, const char *);
+    void renderImage(int, int, const char *);
 
 private:
     SoftwareSerial *_serial;
     uint8_t _wakeupPin;
     uint8_t _resetPin;
+
+    FrameParam *getParamBuffer(int, int, const char *);
 };
 #endif

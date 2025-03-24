@@ -50,22 +50,38 @@ void WaveshareEPD::renderText(FontSize fontSize, int x, int y, const char *text)
     Frame *frame = new Frame();
 
     // Set Font
-    // uint8_t *paramsT = new uint8_t[1]{(uint8_t)fontSize};
-    // paramsT[0] = (uint8_t)fontSize;
-    frame->setBuffer(SET_FONT, new uint8_t[1]{(uint8_t)fontSize}, 1);
+    FrameParam *fontParam = new FrameParam(new uint8_t[1]{(uint8_t)fontSize}, 1);
+    frame->setBuffer(SET_FONT, fontParam);
     _serial->write(frame->getBuffer(), frame->getBufferSize());
 
     frame->resetBuffer();
 
-    // Send Text
-    int textLength = strlen(text);
-    int paramSize = 4 + textLength;
-    uint8_t *params = new uint8_t[paramSize];
-    params[0] = (x >> 8) & 0xFF;
-    params[1] = x & 0xFF;
-    params[2] = (y >> 8) & 0xFF;
-    params[3] = y & 0xFF;
-    memcpy(params + 4, text, textLength * sizeof(uint8_t));
-    frame->setBuffer(DISPLAY_TEXT, params, paramSize);
+    // Display text
+    FrameParam *params = getParamBuffer(x, y, text);
+    frame->setBuffer(DISPLAY_TEXT, params);
     _serial->write(frame->getBuffer(), frame->getBufferSize());
+}
+
+void WaveshareEPD::renderImage(int x, int y, const char *fileName)
+{
+    Frame *frame = new Frame();
+
+    FrameParam *params = getParamBuffer(x, y, fileName);
+    frame->setBuffer(DISPLAY_TEXT, params);
+    _serial->write(frame->getBuffer(), frame->getBufferSize());
+}
+
+FrameParam *WaveshareEPD::getParamBuffer(int x, int y, const char *str)
+{
+    int strLength = strlen(str);
+    Coordinate coord = {x, y};
+
+    int coordBytesSize = coord.getShortBytesSize();
+    int paramSize = coordBytesSize + strLength;
+
+    uint8_t *param = new uint8_t[paramSize];
+    memcpy(param, coord.getShortBytes(), coordBytesSize * sizeof(uint8_t));
+    memcpy(param + coordBytesSize, str, strLength * sizeof(uint8_t));
+
+    return new FrameParam(param, paramSize);
 }

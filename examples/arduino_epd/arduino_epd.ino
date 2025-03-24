@@ -15,7 +15,8 @@ void setup(void)
 
     display->render(CLEAR);
 
-    display->renderText(SIZE_64, 150, 200, "WHATTT");
+    // display->renderText(SIZE_64, 300, 200, "WHATTT");
+    display->renderImage(10, 10, "lena.bmp");
     display->render(UPDATE_DISPLAY);
 }
 

@@ -4,6 +4,8 @@
 #include "types.h"
 #include <Arduino.h>
 
+// These are fixed size (except param)
+#define NUM_FRAME_BYTES 9
 #define NUM_FRAME_LENGTH_BYTES 2
 
 class Command
@@ -13,12 +15,10 @@ public:
 
     CommandType getCommandType();
 
-    uint8_t getCommandByte();
-    uint8_t *getFrameLengthBytes();
-
     int getCommandFrameSize();
     int getFrameLengthSize();
-    int getParamSize();
+    uint8_t getCommandByte();
+    uint8_t *getFrameLengthBytes();
     void setParamSize(int);
 
 private:

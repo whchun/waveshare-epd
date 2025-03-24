@@ -7,13 +7,20 @@
 
 #include <Arduino.h>
 
+struct FrameParam
+{
+    uint8_t *data = NULL;
+    int size = 0;
+    FrameParam(uint8_t *_data, int _size) : data(_data), size(_size) {};
+};
+
 class Frame
 {
 public:
     Frame();
     ~Frame();
 
-    void setBuffer(CommandType, uint8_t *params = NULL, int paramSize = 0);
+    void setBuffer(CommandType, FrameParam *params = NULL);
     uint8_t *getBuffer();
     void resetBuffer();
     int getBufferSize();
