@@ -9,15 +9,15 @@
 enum CommandType
 {
     SLEEP,
+    CLEAR_DISPLAY,
     UPDATE_DISPLAY,
-    ROTATE_SCREEN,
+    ROTATE_DISPLAY,
     // Set color
     SET_FONT,
     DRAW_LINE,
     DRAW_RECTANGLE,
     DRAW_CIRCLE,
     DRAW_TRIANGLE,
-    CLEAR,
     DISPLAY_TEXT,
     DISPLAY_IMAGE,
 };

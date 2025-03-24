@@ -38,19 +38,43 @@ void WaveshareEPD::reset()
     delay(3000);
 }
 
-void WaveshareEPD::render(CommandType commandType, void *param)
+void WaveshareEPD::clearDisplay()
 {
     Frame *frame = new Frame();
-    FrameParam *params = NULL;
-    if (param != NULL)
-    {
-        uint8_t *data = static_cast<uint8_t *>(param);
-        params = new FrameParam(data, 1);
-    }
-
-    frame->setBuffer(commandType, params);
+    frame->setBuffer(CLEAR_DISPLAY);
     _serial->write(frame->getBuffer(), frame->getBufferSize());
 }
+
+void WaveshareEPD::rotateDisplay(Orientation orientation)
+{
+    uint8_t data = static_cast<uint8_t>(orientation);
+    FrameParam *params = new FrameParam(&data, 1);
+
+    Frame *frame = new Frame();
+    frame->setBuffer(ROTATE_DISPLAY, params);
+    _serial->write(frame->getBuffer(), frame->getBufferSize());
+}
+
+void WaveshareEPD::updateDisplay()
+{
+    Frame *frame = new Frame();
+    frame->setBuffer(UPDATE_DISPLAY);
+    _serial->write(frame->getBuffer(), frame->getBufferSize());
+}
+
+// void WaveshareEPD::render(CommandType commandType, void *param)
+// {
+//     Frame *frame = new Frame();
+//     FrameParam *params = NULL;
+//     if (param != NULL)
+//     {
+//         uint8_t *data = static_cast<uint8_t *>(param);
+//         params = new FrameParam(data, 1);
+//     }
+
+//     frame->setBuffer(commandType, params);
+//     _serial->write(frame->getBuffer(), frame->getBufferSize());
+// }
 
 void WaveshareEPD::renderText(FontSize fontSize, int x, int y, const char *text)
 {

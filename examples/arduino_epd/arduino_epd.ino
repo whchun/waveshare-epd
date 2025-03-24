@@ -13,13 +13,13 @@ void setup(void)
     display->wakeup();
     display->reset();
 
-    display->render(CLEAR);
+    display->clearDisplay();
 
-    int param = ORIENTATION_180;
-    display->render(ROTATE_SCREEN, &param);
+    display->rotateDisplay(ORIENTATION_270);
+
     display->renderText(SIZE_64, 300, 200, "Hello World");
 
-    display->render(UPDATE_DISPLAY);
+    display->updateDisplay();
 
 }
 

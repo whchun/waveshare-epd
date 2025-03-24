@@ -16,7 +16,13 @@ public:
     void wakeup();
     void reset();
 
-    void render(CommandType, void *param = NULL);
+    // Screen related
+    void clearDisplay();
+    void rotateDisplay(Orientation orientation = ORIENTATION_0);
+    void updateDisplay();
+
+    // Render
+    // void render(CommandType, void *param = NULL);
     void renderText(FontSize, int, int, const char *);
     void renderImage(int, int, const char *);
 
