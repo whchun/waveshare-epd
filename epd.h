@@ -2,6 +2,7 @@
 #define EPD_H
 
 #include "types.h"
+#include "shape.h"
 #include "frame.h"
 
 #include <Arduino.h>
@@ -22,9 +23,9 @@ public:
     void updateDisplay();
 
     // Render
-    // void render(CommandType, void *param = NULL);
-    void renderText(FontSize, int, int, const char *);
-    void renderImage(int, int, const char *);
+    void drawShape(ShapeType, Shape *, bool fill = false);
+    void drawText(FontSize, int, int, const char *);
+    void drawImage(int, int, const char *);
 
 private:
     SoftwareSerial *_serial;

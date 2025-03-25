@@ -15,9 +15,11 @@ void setup(void)
 
     display->clearDisplay();
 
-    display->rotateDisplay(ORIENTATION_270);
+    display->rotateDisplay(ORIENTATION_180);
 
-    display->renderText(SIZE_64, 300, 200, "Hello World");
+    Line *line = new Line({100, 100}, {200, 200});
+    display->drawShape(LINE, line);
+    display->drawText(SIZE_64, 300, 200, "Hello World");
 
     display->updateDisplay();
 
