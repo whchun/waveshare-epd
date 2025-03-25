@@ -1,5 +1,15 @@
 #include "frame.h"
 
+int FrameParam::getBytesSize()
+{
+    return _size;
+}
+
+uint8_t *FrameParam::getBytes()
+{
+    return _data;
+}
+
 Frame::Frame() : _buffer(NULL), _bufferSize(0)
 {
 }
@@ -15,7 +25,7 @@ void Frame::setBuffer(CommandType commandType, FrameParam *params)
 
     if (params != NULL)
     {
-        command->setParamSize(params->size);
+        command->setParamSize(params->getBytesSize());
     }
 
     int offset = 0;
@@ -24,7 +34,7 @@ void Frame::setBuffer(CommandType commandType, FrameParam *params)
 
     // Frame header
     _buffer[0] = FRAME_HEADER;
-    offset += 1;
+    offset += sizeof(uint8_t);
 
     // Frame Length
     int frameLengthSize = command->getFrameLengthSize();
@@ -36,16 +46,16 @@ void Frame::setBuffer(CommandType commandType, FrameParam *params)
 
     // Command
     _buffer[offset] = command->getCommandByte();
-    offset += 1;
+    offset += sizeof(uint8_t);
 
     // Params
     if (params != NULL)
     {
         memcpy(
             _buffer + offset,
-            params->data,
-            params->size * sizeof(uint8_t));
-        offset += params->size;
+            params->getBytes(),
+            params->getBytesSize() * sizeof(uint8_t));
+        offset += params->getBytesSize();
     }
 
     // Frame end
@@ -77,7 +87,7 @@ uint8_t Frame::getParityByte()
         return 0x00;
 
     uint8_t parityByte = _buffer[0];
-    for (int i = 1; i < _bufferSize - 1; i++)
+    for (int i = 1; i < _bufferSize - 1; i += sizeof(uint8_t))
     {
         parityByte ^= _buffer[i];
     }

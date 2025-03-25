@@ -8,6 +8,8 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 
+#define BAUD_RATE 115200
+
 class WaveshareEPD
 {
 public:
@@ -24,8 +26,12 @@ public:
 
     // Render
     void drawShape(ShapeType, Shape *, bool fill = false);
-    void drawText(int, int, const char *, FontSize fontSize = SIZE_32);
+    void drawText(int, int, const char *);
     void drawImage(int, int, const char *);
+
+    // Config
+    void setFontSize(FontSize);
+    void setColor(Color, Color);
 
 private:
     SoftwareSerial *_serial;

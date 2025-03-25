@@ -7,13 +7,18 @@
 
 #include <Arduino.h>
 
-struct FrameParam
+class FrameParam
 {
-    uint8_t *data = NULL;
-    int size = 0;
-    FrameParam(uint8_t *_data, int _size) : data(_data), size(_size) {};
-};
+public:
+    FrameParam(uint8_t *data, int size) : _data(data), _size(size) {};
 
+    int getBytesSize();
+    uint8_t *getBytes();
+
+private:
+    uint8_t *_data;
+    int *_size;
+};
 class Frame
 {
 public:

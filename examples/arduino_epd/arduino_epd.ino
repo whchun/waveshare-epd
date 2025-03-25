@@ -18,9 +18,11 @@ void setup(void)
     display->rotateDisplay(ORIENTATION_0);
 
     // Draw shape
+    display->setColor(LIGHT_GRAY, WHITE);
     Line *line = new Line({100, 100}, {200, 200});
     display->drawShape(LINE, line);
 
+    display->setColor(BLACK, WHITE);
     Rectangle *rect = new Rectangle({300, 300}, {350, 350});
     display->drawShape(RECTANGLE, rect, true);
 
@@ -31,7 +33,8 @@ void setup(void)
     display->drawShape(TRIANGLE, triangle);
 
     // Draw text
-    display->drawText(300, 200, "Hello World", SIZE_64);
+    display->setFontSize(SIZE_64);
+    display->drawText(300, 200, "Hello World");
 
     // Update display
     display->updateDisplay();

@@ -8,10 +8,10 @@ WaveshareEPD::WaveshareEPD(uint8_t resetPin, uint8_t wakeupPin, uint8_t rx, uint
 
 void WaveshareEPD::init()
 {
-    _serial->begin(115200);
-    // TODO: Update to digitalwrite
-    pinMode(_wakeupPin, HIGH);
-    pinMode(_resetPin, HIGH);
+    _serial->begin(BAUD_RATE);
+
+    digitalWrite(_wakeupPin, HIGH);
+    digitalWrite(_resetPin, HIGH);
 }
 
 void WaveshareEPD::wakeup()
@@ -48,7 +48,7 @@ void WaveshareEPD::clearDisplay()
 void WaveshareEPD::rotateDisplay(Orientation orientation)
 {
     uint8_t data = static_cast<uint8_t>(orientation);
-    FrameParam *params = new FrameParam(&data, 1);
+    FrameParam *params = new FrameParam(&data, sizeof(uint8_t));
 
     Frame *frame = new Frame();
     frame->setBuffer(ROTATE_DISPLAY, params);
@@ -90,18 +90,9 @@ void WaveshareEPD::drawShape(ShapeType shapeType, Shape *data, bool fill)
     _serial->write(frame->getBuffer(), frame->getBufferSize());
 }
 
-void WaveshareEPD::drawText(int x, int y, const char *text, FontSize fontSize)
+void WaveshareEPD::drawText(int x, int y, const char *text)
 {
     Frame *frame = new Frame();
-
-    // Set Font
-    FrameParam *fontParam = new FrameParam(new uint8_t[1]{(uint8_t)fontSize}, 1);
-    frame->setBuffer(SET_FONT, fontParam);
-    _serial->write(frame->getBuffer(), frame->getBufferSize());
-
-    frame->resetBuffer();
-
-    // Display text
     FrameParam *params = getTextParamBuffer(x, y, text);
     frame->setBuffer(DISPLAY_TEXT, params);
     _serial->write(frame->getBuffer(), frame->getBufferSize());
@@ -109,11 +100,30 @@ void WaveshareEPD::drawText(int x, int y, const char *text, FontSize fontSize)
 
 void WaveshareEPD::drawImage(int x, int y, const char *fileName)
 {
-    Frame *frame = new Frame();
-
     // Image uses same as text parameter
+    Frame *frame = new Frame();
     FrameParam *params = getTextParamBuffer(x, y, fileName);
     frame->setBuffer(DISPLAY_IMAGE, params);
+    _serial->write(frame->getBuffer(), frame->getBufferSize());
+}
+
+void WaveshareEPD::setFontSize(FontSize fontSize)
+{
+    Frame *frame = new Frame();
+
+    uint8_t data = static_cast<uint8_t>(fontSize);
+    FrameParam *fontParam = new FrameParam(&data, sizeof(uint8_t));
+    frame->setBuffer(SET_FONT, fontParam);
+    _serial->write(frame->getBuffer(), frame->getBufferSize());
+}
+
+void WaveshareEPD::setColor(Color foreground, Color background)
+{
+    Frame *frame = new Frame();
+
+    int paramSize = 2;
+    FrameParam *param = new FrameParam(new uint8_t[paramSize]{foreground, background}, paramSize * sizeof(uint8_t));
+    frame->setBuffer(SET_COLOR, param);
     _serial->write(frame->getBuffer(), frame->getBufferSize());
 }
 

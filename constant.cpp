@@ -7,6 +7,7 @@ const Command Constant::commands[COMMAND_SIZE] = {
     Command(CLEAR_DISPLAY, 0x2E),
     Command(ROTATE_DISPLAY, 0x0D),
     Command(UPDATE_DISPLAY, 0x0A),
+    Command(SET_COLOR, 0x10),
     Command(SET_FONT, 0x1E),
     Command(DRAW_LINE, 0x22),
     Command(FILL_DRAW_RECTANGLE, 0x24),

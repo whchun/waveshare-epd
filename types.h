@@ -12,7 +12,7 @@ enum CommandType
     CLEAR_DISPLAY,
     UPDATE_DISPLAY,
     ROTATE_DISPLAY,
-    // Set color
+    SET_COLOR,
     DRAW_LINE,
     DRAW_RECTANGLE,
     DRAW_CIRCLE,
@@ -25,12 +25,28 @@ enum CommandType
     DISPLAY_IMAGE,
 };
 
+enum Orientation
+{
+    ORIENTATION_0 = 0,
+    ORIENTATION_90 = 1,
+    ORIENTATION_180 = 2,
+    ORIENTATION_270 = 3,
+};
+
 enum ShapeType
 {
     LINE,
     RECTANGLE,
     CIRCLE,
-    TRIANGLE
+    TRIANGLE,
+};
+
+enum Color
+{
+    BLACK = 0,
+    DARK_GRAY = 1,
+    LIGHT_GRAY = 2,
+    WHITE = 3,
 };
 
 enum FontSize
@@ -38,12 +54,4 @@ enum FontSize
     SIZE_32 = 1,
     SIZE_48 = 2,
     SIZE_64 = 3,
-};
-
-enum Orientation
-{
-    ORIENTATION_0 = 0,
-    ORIENTATION_90 = 1,
-    ORIENTATION_180 = 2,
-    ORIENTATION_270 = 3,
 };
