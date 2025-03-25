@@ -1,10 +1,17 @@
+/**
+ * @file types.h
+ * @brief Common types used in class
+ *
+ * More reference is in display wiki page
+ * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
+ *
+ * @author whchun
+ * @date 2025-03-24
+ */
 #pragma once
 
-#include <Arduino.h>
-
 /*
- * Command from command look-up table
- * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
+ * @brief Commands from command look-up table
  */
 enum CommandType
 {
@@ -25,6 +32,9 @@ enum CommandType
     DISPLAY_IMAGE,
 };
 
+/*
+ * @brief Display orientation
+ */
 enum Orientation
 {
     ORIENTATION_0 = 0,
@@ -33,6 +43,9 @@ enum Orientation
     ORIENTATION_270 = 3,
 };
 
+/*
+ * @brief Shape type for basic drawings
+ */
 enum ShapeType
 {
     LINE,
@@ -41,6 +54,9 @@ enum ShapeType
     TRIANGLE,
 };
 
+/*
+ * @brief Color
+ */
 enum Color
 {
     BLACK = 0,
@@ -49,6 +65,9 @@ enum Color
     WHITE = 3,
 };
 
+/*
+ * @brief Display font size
+ */
 enum FontSize
 {
     SIZE_32 = 1,
