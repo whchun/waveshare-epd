@@ -64,13 +64,33 @@ void WaveshareEPD::updateDisplay()
 
 void WaveshareEPD::drawShape(ShapeType shapeType, Shape *data, bool fill)
 {
-    // switch (shapeType)
-    // {
-    //     if shape
-    // }
+    CommandType commandType;
+    switch (shapeType)
+    {
+    case LINE:
+        commandType = DRAW_LINE;
+        break;
+    case RECTANGLE:
+        commandType = fill ? FILL_DRAW_RECTANGLE : DRAW_RECTANGLE;
+        break;
+    case CIRCLE:
+        commandType = fill ? FILL_DRAW_CIRCLE : DRAW_CIRCLE;
+        break;
+    case TRIANGLE:
+        commandType = fill ? FILL_DRAW_TRIANGLE : DRAW_TRIANGLE;
+        break;
+    default:
+        break;
+    }
+
+    Frame *frame = new Frame();
+
+    FrameParam *shapeParam = new FrameParam(data->getBytes(), data->getBytesSize());
+    frame->setBuffer(commandType, shapeParam);
+    _serial->write(frame->getBuffer(), frame->getBufferSize());
 }
 
-void WaveshareEPD::drawText(FontSize fontSize, int x, int y, const char *text)
+void WaveshareEPD::drawText(int x, int y, const char *text, FontSize fontSize)
 {
     Frame *frame = new Frame();
 
@@ -100,14 +120,14 @@ void WaveshareEPD::drawImage(int x, int y, const char *fileName)
 FrameParam *WaveshareEPD::getTextParamBuffer(int x, int y, const char *str)
 {
     int strLength = strlen(str);
-    Coordinate *coord = new Coordinate(x, y);
+    Point *point = new Point(x, y);
 
-    int coordBytesSize = coord->getBytesSize();
-    int paramSize = coordBytesSize + strLength;
+    int pointBytesSize = point->getBytesSize();
+    int paramSize = pointBytesSize + strLength;
 
     uint8_t *param = new uint8_t[paramSize];
-    memcpy(param, coord->getBytes(), coordBytesSize * sizeof(uint8_t));
-    memcpy(param + coordBytesSize, str, strLength * sizeof(uint8_t));
+    memcpy(param, point->getBytes(), pointBytesSize * sizeof(uint8_t));
+    memcpy(param + pointBytesSize, str, strLength * sizeof(uint8_t));
 
     return new FrameParam(param, paramSize);
 }

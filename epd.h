@@ -24,7 +24,7 @@ public:
 
     // Render
     void drawShape(ShapeType, Shape *, bool fill = false);
-    void drawText(FontSize, int, int, const char *);
+    void drawText(int, int, const char *, FontSize fontSize = SIZE_32);
     void drawImage(int, int, const char *);
 
 private:

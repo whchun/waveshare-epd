@@ -5,7 +5,7 @@
 #include "command.h"
 #include <Arduino.h>
 
-#define COMMAND_SIZE 11
+#define COMMAND_SIZE 14
 
 #define FRAME_HEADER 0xA5
 #define FRAME_END_SIZE 4

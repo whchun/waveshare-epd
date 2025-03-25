@@ -8,10 +8,13 @@ const Command Constant::commands[COMMAND_SIZE] = {
     Command(ROTATE_DISPLAY, 0x0D),
     Command(UPDATE_DISPLAY, 0x0A),
     Command(SET_FONT, 0x1E),
-    Command(DRAW_LINE, 0x22),      // 2 coord
-    Command(DRAW_RECTANGLE, 0x25), // 2 coord (Fill is 24)
-    Command(DRAW_CIRCLE, 0x26),    // 1 coord + 1 short (Fill is 27)
-    Command(DRAW_TRIANGLE, 0x28),  // 3 coord (Fill is 29)
+    Command(DRAW_LINE, 0x22),
+    Command(FILL_DRAW_RECTANGLE, 0x24),
+    Command(DRAW_RECTANGLE, 0x25),
+    Command(DRAW_CIRCLE, 0x26),
+    Command(FILL_DRAW_CIRCLE, 0x27),
+    Command(DRAW_TRIANGLE, 0x28),
+    Command(FILL_DRAW_TRIANGLE, 0x29),
     Command(DISPLAY_TEXT, 0x30),
     Command(DISPLAY_IMAGE, 0x70)};
 
