@@ -1,3 +1,13 @@
+/**
+ * @file shape.cpp
+ * @brief Basic drawing, text, and image related (coordinate).
+ *
+ * More reference is in display wiki page
+ * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
+ *
+ * @author whchun
+ * @date 2025-03-24
+ */
 #include "shape.h"
 
 int Point::getBytesSize()

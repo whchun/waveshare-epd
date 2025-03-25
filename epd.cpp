@@ -1,3 +1,13 @@
+/**
+ * @file epd.cpp
+ * @brief E-paper display object used in Arduino.
+ *
+ * More reference is in display wiki page
+ * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
+ *
+ * @author whchun
+ * @date 2025-03-24
+ */
 #include "epd.h"
 
 WaveshareEPD::WaveshareEPD(uint8_t resetPin, uint8_t wakeupPin, uint8_t rx, uint8_t tx) : _resetPin(resetPin), _wakeupPin(wakeupPin)

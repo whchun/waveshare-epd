@@ -1,3 +1,13 @@
+/**
+ * @file epd.h
+ * @brief E-paper display object used in Arduino.
+ *
+ * More reference is in display wiki page
+ * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
+ *
+ * @author whchun
+ * @date 2025-03-24
+ */
 #ifndef EPD_H
 #define EPD_H
 

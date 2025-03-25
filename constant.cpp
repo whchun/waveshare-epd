@@ -1,3 +1,13 @@
+/**
+ * @file constant.cpp
+ * @brief Constant variables used in the library.
+ *
+ * More reference is in display wiki page
+ * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
+ *
+ * @author whchun
+ * @date 2025-03-24
+ */
 #include "constant.h"
 
 const uint8_t Constant::frameEnd[FRAME_END_SIZE] = {0xCC, 0x33, 0xC3, 0x3C};

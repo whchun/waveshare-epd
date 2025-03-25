@@ -1,3 +1,13 @@
+/**
+ * @file command.cpp
+ * @brief Command and its byte date related.
+ *
+ * More reference is in display wiki page
+ * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
+ *
+ * @author whchun
+ * @date 2025-03-24
+ */
 #include "command.h"
 
 Command::Command(CommandType commandType, uint8_t commandByte) : _commandType(commandType), _commandByte(commandByte), _paramSize(0)

@@ -1,3 +1,13 @@
+/**
+ * @file constant.h
+ * @brief Constant variables used in the library.
+ *
+ * More reference is in display wiki page
+ * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
+ *
+ * @author whchun
+ * @date 2025-03-24
+ */
 #ifndef CONSTANT_H
 #define CONSTANT_H
 
