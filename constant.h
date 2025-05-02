@@ -6,7 +6,7 @@
  * https://www.waveshare.com/wiki/4.3inch_e-Paper_UART_Module
  *
  * @author whchun
- * @date 2025-03-24
+ * @date 2025-05-01
  */
 #ifndef CONSTANT_H
 #define CONSTANT_H
