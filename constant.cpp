@@ -13,6 +13,7 @@
 const uint8_t Constant::frameEnd[FRAME_END_SIZE] = {0xCC, 0x33, 0xC3, 0x3C};
 
 const Command Constant::commands[COMMAND_SIZE] = {
+    Command(SET_BAUD_RATE, 0x01),
     Command(SLEEP, 0x08),
     Command(CLEAR_DISPLAY, 0x2E),
     Command(ROTATE_DISPLAY, 0x0D),

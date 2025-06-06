@@ -33,6 +33,7 @@ public:
     void clearDisplay();
     void rotateDisplay(Orientation orientation = ORIENTATION_0);
     void updateDisplay();
+    void sleep();
 
     // Render
     void drawShape(ShapeType, Shape *, bool fill = false);

@@ -72,6 +72,13 @@ void WaveshareEPD::updateDisplay()
     _serial->write(frame->getBuffer(), frame->getBufferSize());
 }
 
+void WaveshareEPD::sleep()
+{
+    Frame *frame = new Frame();
+    frame->setBuffer(SLEEP);
+    _serial->write(frame->getBuffer(), frame->getBufferSize());
+}
+
 void WaveshareEPD::drawShape(ShapeType shapeType, Shape *data, bool fill)
 {
     CommandType commandType;

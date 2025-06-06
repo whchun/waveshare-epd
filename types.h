@@ -15,6 +15,7 @@
  */
 enum CommandType
 {
+    SET_BAUD_RATE,
     SLEEP,
     CLEAR_DISPLAY,
     UPDATE_DISPLAY,
